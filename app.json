@@ -13,6 +13,13 @@
         {
           "origin": "https://n"
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends.",
+          "cameraPermission": "The app needs to access camera so you could take picture you memories"
+        }
       ]
     ],
     "name": "memoirs",
