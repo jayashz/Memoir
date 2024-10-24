@@ -33,6 +33,7 @@ export default function Layout() {
         }}
       />
       <Stack.Screen name="AddPlace" />
+      <Stack.Screen name="Map"/>
     </Stack>
   );
 }

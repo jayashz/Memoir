@@ -4,8 +4,10 @@ import CustBtn from "./ui/CustBtn";
 import * as Location from "expo-location";
 import axios from "axios";
 import { API_key } from "../../API_key";
+import { useNavigation } from "expo-router";
 const LocationPicker = () => {
   const [location, setLocation] = useState();
+  const navigation = useNavigation();
   const pickLocation = () => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -39,6 +41,7 @@ const LocationPicker = () => {
       </View>
       <View className="">
         <CustBtn icon="map" onPress={pickLocation}>Locate me</CustBtn>
+        <CustBtn icon="map" onPress={()=>navigation.navigate('Map')}>Pick a location</CustBtn>
       </View>
     </View>
   );
