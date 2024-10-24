@@ -2,6 +2,7 @@ import { View, Text, ScrollView, TextInput } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../constants/Colors";
 import ImagePicker from "./ImagePicker";
+import LocationPicker from "./LocationPicker";
 
 
 const PlaceForm = () => {
@@ -14,9 +15,11 @@ const PlaceForm = () => {
         <TextInput
           onChangeText={(e) => setTitle(e)}
           value={title}
-          className={`p-4 border-b-2 w-full border-[${Colors.primaryOrange}]`}
+          className={`p-4 border-b-2 w-full`}
+          style={{borderColor:Colors.primaryOrange}}
         />
       <ImagePicker/>
+      <LocationPicker/>
       </View>
     </ScrollView>
   );

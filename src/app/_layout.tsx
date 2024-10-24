@@ -25,7 +25,7 @@ export default function Layout() {
                 navigation.navigate("AddPlace");
               }}
             >
-              <AntDesign name="pluscircle" size={24} color="black" />
+              <AntDesign name="pluscircle" size={28} color={Colors.primaryOrange} />
             </Pressable>
           ),
           headerTitle: "Places you visited",

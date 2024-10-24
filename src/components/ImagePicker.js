@@ -6,8 +6,8 @@ import {
   launchImageLibraryAsync,
 } from "expo-image-picker";
 import { useState } from "react";
-
 import { Colors } from "../constants/Colors";
+import CustBtn from "./ui/CustBtn";
 
 function ImagePicker() {
   const [pickedImage, setPickedImage] = useState();
@@ -57,14 +57,13 @@ function ImagePicker() {
   }
 
   return (
-    <View className='w-full mt-4'>
-      <View className='w-full h-[40vh] items-center justify-center bg-gray-300'>
+    <View className="w-full mt-4">
+      <View className="w-full h-[40vh] items-center justify-center bg-gray-300 rounded-md">
         {imagePreview}
       </View>
-      <Button title="Take Image" onPress={takeImageHandler} />
+      <CustBtn onPress={takeImageHandler} icon='camera'>Take a picture</CustBtn>
     </View>
   );
 }
 
 export default ImagePicker;
-
