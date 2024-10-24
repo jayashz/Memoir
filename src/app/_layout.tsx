@@ -1,5 +1,5 @@
 import "../global.css";
-import { Stack, Tabs } from "expo-router";
+import { Stack } from "expo-router";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Pressable } from "react-native";
 import { useNavigation } from "expo-router";
@@ -25,7 +25,11 @@ export default function Layout() {
                 navigation.navigate("AddPlace");
               }}
             >
-              <AntDesign name="pluscircle" size={28} color={Colors.primaryOrange} />
+              <AntDesign
+                name="pluscircle"
+                size={28}
+                color={Colors.primaryOrange}
+              />
             </Pressable>
           ),
           headerTitle: "Places you visited",
@@ -33,7 +37,9 @@ export default function Layout() {
         }}
       />
       <Stack.Screen name="AddPlace" />
-      <Stack.Screen name="Map"/>
+      <Stack.Screen
+        name="Map"
+      />
     </Stack>
   );
 }
