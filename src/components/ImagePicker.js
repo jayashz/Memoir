@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Colors } from "../constants/Colors";
 import CustBtn from "./ui/CustBtn";
 
-function ImagePicker() {
+function ImagePicker({onSelectImage}) {
   const [pickedImage, setPickedImage] = useState();
 
   const [cameraPermissionInformation, requestPermission] =
@@ -41,10 +41,11 @@ function ImagePicker() {
     }
 
     const image = await launchCameraAsync({
-      allowsEditing: true,
+      allowsEditing:true,
       aspect: [16, 9],
       quality: 0.5,
     });
+    onSelectImage({imgUri:image.assets[0].uri});
     setPickedImage(image.assets[0].uri);
   }
 

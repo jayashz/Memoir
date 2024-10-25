@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { PressableOpacity } from "react-native-pressable-opacity";
 import { Colors } from "../../constants/Colors";
@@ -6,7 +6,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 
 const CustBtn = ({ onPress, children, icon }) => {
   return (
-    <PressableOpacity onPress={onPress}>
+    <PressableOpacity onPress={onPress} style={({pressed})=>pressed?styles.pressed:''}>
       <View
         className="p-4 mt-4 items-center rounded-md flex-row justify-center gap-2"
         style={{ backgroundColor: Colors.primaryOrange }}
@@ -19,3 +19,9 @@ const CustBtn = ({ onPress, children, icon }) => {
 };
 
 export default CustBtn;
+
+const styles = StyleSheet.create({
+  pressed:{
+    opacity:0.2
+  }
+})
