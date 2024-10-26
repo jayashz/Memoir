@@ -4,7 +4,7 @@ import PlaceForm from '../components/PlaceForm'
 import { Camera, useCameraPermissions } from 'expo-camera'
 
 
-const AddPlace = ({pickedLat,pickedLng}) => {
+const AddPlace = () => {
   
   return (
     <View className='flex-1'>

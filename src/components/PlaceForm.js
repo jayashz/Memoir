@@ -4,6 +4,8 @@ import { Colors } from "../constants/Colors";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 import CustBtn from "./ui/CustBtn";
+import axios from "axios";
+import { geocodeAsync } from "expo-location";
 
 const PlaceForm = () => {
   const [title, setTitle] = useState("");
@@ -11,6 +13,17 @@ const PlaceForm = () => {
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setpickedLocation] = useState();
 
+  
+  async function saveHandler() {
+    var requestOptions = {
+      method: 'GET',
+    };
+    
+    fetch("https://api.geoapify.com/v1/geocode/reverse?lat=51.21709661403662&lon=6.7782883744862374&apiKey=5d2ebf29a4284b56996ce858fcf181e9", requestOptions)
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
   return (
     <ScrollView className="flex-1 p-4 " onScrollBeginDrag={Keyboard.dismiss}>
       <View className="flex-1 justify-center items-center mb-14">
@@ -35,7 +48,9 @@ const PlaceForm = () => {
           value={description}
         />
         <View className="w-full">
-          <CustBtn icon="save">Save</CustBtn>
+          <CustBtn icon="save" onPress={saveHandler}>
+            Save
+          </CustBtn>
         </View>
       </View>
     </ScrollView>

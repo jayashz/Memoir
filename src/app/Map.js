@@ -16,8 +16,8 @@ const Map = () => {
   // });
 
   const region = {
-    latitude: 37.78825,
-    longitude: -122.4324,
+    latitude: 27.612390995083636,
+    longitude: 84.57322361140824,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
@@ -40,11 +40,12 @@ const Map = () => {
     });
   }
   return (
-    <View style={{flex:1, position: "relative"}}>
+
       <MapView
         style={{ flex: 1 }}
         initialRegion={region}
         onPress={selectLocation}
+      
       >
         {selectedLocation && (
           <Marker
@@ -55,7 +56,7 @@ const Map = () => {
             }}
           />
         )}
-        <View style={{flex:1}}>
+
         <Pressable
           onPress={confirmLocation}
           className="p-2 w-14 h-14 rounded-full justify-center items-center absolute bottom-12 right-8"
@@ -67,9 +68,9 @@ const Map = () => {
             <MaterialIcons name="done" size={26} color="black" />
           )}
         </Pressable>
-        </View>
+
       </MapView>
-    </View>
+
   );
 };
 
