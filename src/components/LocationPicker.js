@@ -12,7 +12,9 @@ const LocationPicker = ({onSelectLocation}) => {
   const isFocused = useIsFocused();
   const route = useRoute();
 
-  
+  useEffect(()=>{
+    onSelectLocation(currLocation);
+  },[currLocation])
 
   useEffect(() => {
     if(isFocused&& route.params){
@@ -21,7 +23,7 @@ const LocationPicker = ({onSelectLocation}) => {
         lat: route.params.pickedLat,
       };
       setLocation(pickedLocation);
-      onSelectLocation(currLocation);
+
     }
   }, [route,isFocused]);
 
@@ -38,8 +40,6 @@ const LocationPicker = ({onSelectLocation}) => {
         lng: location.coords.longitude,
         lat: location.coords.latitude,
       });
-      onSelectLocation(currLocation);
-      //   const image= await axios.get('https://maps.geoapify.com/v1/staticmap?style=osm-bright-smooth&width=400&height=300&center=lonlat%3A84.57322361140824%2C27.612390995083636&zoom=14.3497&marker=lonlat%3A84.57322361140824%2C27.612390995083636&apiKey=5d2ebf29a4284b56996ce858fcf181e9');
     })();
   };
   let image;

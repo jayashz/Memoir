@@ -13,16 +13,18 @@ const PlaceForm = () => {
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setpickedLocation] = useState();
 
-  
-  async function saveHandler() {
+  async function onPickLocation(currLocation){
     var requestOptions = {
       method: 'GET',
     };
-    
-    fetch("https://api.geoapify.com/v1/geocode/reverse?lat=51.21709661403662&lon=6.7782883744862374&apiKey=5d2ebf29a4284b56996ce858fcf181e9", requestOptions)
+    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${currLocation.lat}&lon=${currLocation.lng}&apiKey=5d2ebf29a4284b56996ce858fcf181e9`, requestOptions)
       .then(response => response.json())
-      .then(result => console.log(result))
+      .then(result => console.log(result.features[0].properties.formatted))
       .catch(error => console.log('error', error));
+  }
+  
+  async function saveHandler() {
+   
   }
   return (
     <ScrollView className="flex-1 p-4 " onScrollBeginDrag={Keyboard.dismiss}>
@@ -37,7 +39,7 @@ const PlaceForm = () => {
         />
         <ImagePicker onSelectImage={({ imgUri }) => setSelectedImage(imgUri)} />
         <LocationPicker
-          onSelectLocation={(currLocation) => setpickedLocation(currLocation)}
+          onSelectLocation={(currLocation) => onPickLocation(currLocation)}
         />
         <TextInput
           multiline
