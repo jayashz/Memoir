@@ -4,21 +4,21 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Button, Pressable } from "react-native";
 import { useNavigation } from "expo-router";
 import { Colors } from "../constants/Colors";
-
+import { Provider } from "react-redux";
+import {store} from "../store/store";
 
 export default function Layout() {
   const navigation = useNavigation();
 
   return (
-
-    <Stack
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: Colors.secondaryWhite,
-        },
-      }}
-    >
-      
+    <Provider store={store}>
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.secondaryWhite,
+          },
+        }}
+      >
         <Stack.Screen
           name="index"
           options={{
@@ -36,14 +36,11 @@ export default function Layout() {
               </Pressable>
             ),
             headerTitle: "Places you visited",
-
-            
           }}
         />
         <Stack.Screen name="AddPlace" />
         <Stack.Screen name="Map" options={{ headerShown: false }} />
-      
-    </Stack>
-
+      </Stack>
+    </Provider>
   );
 }
