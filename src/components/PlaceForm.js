@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, TextInput, Keyboard, Alert } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  Keyboard,
+  Alert,
+} from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../constants/Colors";
 import ImagePicker from "./ImagePicker";
@@ -6,7 +13,7 @@ import LocationPicker from "./LocationPicker";
 import CustBtn from "./ui/CustBtn";
 import { useNavigation } from "expo-router";
 
-const PlaceForm = ({onSave}) => {
+const PlaceForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedImage, setSelectedImage] = useState();
@@ -15,30 +22,43 @@ const PlaceForm = ({onSave}) => {
 
   const navigation = useNavigation();
 
-  async function onPickLocation(currLocation){
+  function onPickLocation(currLocation) {
     setUserLatLng(currLocation);
-    var requestOptions = {
-      method: 'GET',
-    };
-    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${currLocation.lat}&lon=${currLocation.lng}&apiKey=5d2ebf29a4284b56996ce858fcf181e9`, requestOptions)
-      .then(response => response.json())
-      .then(result => setpickedLocation(result.features[0].properties.formatted))
-      .catch(error => console.log('error', error));
-  }
-  
-  function saveHandler() {
-
-    if(userLatLng=== undefined|| title.length==0 || selectedImage=== undefined){
-      Alert.alert('Invalid input!','Please check your form and try again');
+    if (!currLocation) {
       return;
     }
-      
+    var requestOptions = {
+      method: "GET",
+    };
+    fetch(
+      `https://api.geoapify.com/v1/geocode/reverse?lat=${currLocation.lat}&lon=${currLocation.lng}&apiKey=5d2ebf29a4284b56996ce858fcf181e9`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) =>
+        setpickedLocation(result.features[0].properties.formatted)
+      )
+      .catch((error) => console.log("error", error));
+  }
 
-    onSave({title:title,
-      description:description.length==0? 'No description was added!':description,
-      image:selectedImage,
-      Address:pickedLocation,
-      location:userLatLng,
+  function saveHandler() {
+    if (
+      userLatLng === undefined ||
+      title.length == 0 ||
+      selectedImage === undefined
+    ) {
+      Alert.alert("Invalid input!", "Please check your form and try again");
+      return;
+    }
+
+    navigation.navigate("index", {
+      title: title,
+      description:
+        description.length == 0 ? "No description was added!" : description,
+      imageUri: selectedImage,
+      Address: pickedLocation,
+      location: userLatLng,
+      id: userLatLng.lat + "id" + Math.floor(Math.random() * 100),
     });
   }
   return (

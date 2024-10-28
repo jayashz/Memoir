@@ -5,7 +5,6 @@ import { Colors } from "@/constants/Colors";
 
 const PlaceList = ({ places }) => {
   if (!places || places.length === 0) {
-
     return (
       <View className="flex-1 justify-center items-center">
         <Text className={`text-3xl text-[${Colors.primaryRed}]`} >No places added yet..</Text>
@@ -17,6 +16,7 @@ const PlaceList = ({ places }) => {
       data={places}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => <PlaceItem place={item} />}
+      style={{flex:1, padding:10}}
     />
   );
 };

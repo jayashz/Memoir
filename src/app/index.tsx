@@ -1,20 +1,27 @@
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import PlaceList from '../components/PlaceList'
-import { useIsFocused, useRoute} from '@react-navigation/native';
+import { View, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import PlaceList from "../components/PlaceList";
+import { useIsFocused, useRoute } from "@react-navigation/native";
 
 const index = () => {
   const isFocused = useIsFocused();
   const route = useRoute();
-  useState(()=>{
-    if(isFocused && route.params){
-      console.log('asdasd');
+
+  const [memories, setMemories] = useState([
+    
+  ]);
+
+  useEffect(() => {
+    if (isFocused && route.params) {
+      const memory = route.params;
+      setMemories((currMemories) => [...currMemories, memory]);
     }
-  },[isFocused,route]);
+  }, [isFocused, route]);
 
-  return (
-    <PlaceList />
-  )
-}
+  useEffect(() => {
+    console.log(memories);
+  }, [memories]);
+  return <PlaceList places={memories} />;
+};
 
-export default index
+export default index;
