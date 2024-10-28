@@ -4,16 +4,14 @@ import PlaceForm from '../components/PlaceForm'
 import { useNavigation } from 'expo-router'
 
 
-const AddPlace = () => {
-  const navigation = useNavigation();
-  function saveMemory(data){
-    navigation.navigate('index',data);
-  }
+const AddMemory = () => {
+
+  
   return (
     <View className='flex-1'>
-        <PlaceForm onSave={saveMemory}/>
+        <PlaceForm/>
     </View>
   )
 }
 
-export default AddPlace
+export default AddMemory

@@ -1,7 +1,7 @@
 import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
 
-const PlaceItem = ({ place, onSelect }) => {
+const MemoryItem = ({ place, onSelect }) => {
   return (
     <Pressable onPress={onSelect}>
       <View className="relative w-full">
@@ -18,4 +18,4 @@ const PlaceItem = ({ place, onSelect }) => {
   );
 };
 
-export default PlaceItem;
+export default MemoryItem;

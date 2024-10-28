@@ -9,11 +9,6 @@ const Map = () => {
   const [selectedLocation, setSelectedLocation] = useState([]);
   const navigation = useNavigation();
 
-  // navigation.setOptions({
-  //   headerRight: () => (
-  //
-  //   ),
-  // });
 
   const region = {
     latitude: 27.612390995083636,
@@ -34,7 +29,7 @@ const Map = () => {
       return;
     }
 
-    navigation.navigate("AddPlace", {
+    navigation.navigate("AddMemory", {
       pickedLat: selectedLocation.lat,
       pickedLng: selectedLocation.lng,
     });

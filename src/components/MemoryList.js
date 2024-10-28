@@ -1,13 +1,13 @@
 import { FlatList,View, Text } from "react-native";
 import React from "react";
-import PlaceItem from "./PlaceItem";
+import MemoryItem from "./MemoryItem";
 import { Colors } from "@/constants/Colors";
 
-const PlaceList = ({ places }) => {
+const MemoryList = ({ places }) => {
   if (!places || places.length === 0) {
     return (
       <View className="flex-1 justify-center items-center">
-        <Text className={`text-3xl text-[${Colors.primaryRed}]`} >No places added yet..</Text>
+        <Text className={`text-3xl`}  style={{color:Colors.primaryRed}}>No places added yet..</Text>
       </View>
     );
   }
@@ -21,4 +21,4 @@ const PlaceList = ({ places }) => {
   );
 };
 
-export default PlaceList;
+export default MemoryList;
