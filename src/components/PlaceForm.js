@@ -5,7 +5,6 @@ import {
   TextInput,
   Keyboard,
   Alert,
-  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../constants/Colors";
@@ -15,6 +14,7 @@ import CustBtn from "./ui/CustBtn";
 import { useNavigation } from "expo-router";
 import { useDispatch } from "react-redux";
 import { saveMemory } from "../store/memorySlice";
+import {insertMemory} from '../services/database';
 
 const PlaceForm = () => {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ const PlaceForm = () => {
       .catch((error) => console.log("error", error));
   }
 
-  function saveHandler() {
+  async function saveHandler() {
     if (
       userLatLng === undefined ||
       title.length == 0 ||
@@ -54,6 +54,15 @@ const PlaceForm = () => {
       Alert.alert("Invalid input!", "Please check your form and try again");
       return;
     }
+    await insertMemory({
+      title: title,
+      description:
+        description.length == 0 ? "No description was added!" : description,
+      imageUri: selectedImage,
+      Address: pickedLocation,
+      location: userLatLng,
+      
+    });
     dispatch(
       saveMemory({
         title: title,

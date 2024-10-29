@@ -15,7 +15,7 @@ const MemoryList = ({ places }) => {
     <FlatList
       data={places}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <PlaceItem place={item} />}
+      renderItem={({ item }) => <MemoryItem place={item} />}
       style={{flex:1, padding:10}}
     />
   );
