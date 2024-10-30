@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import MemoryList from "../components/MemoryList";
 import { useSelector } from "react-redux";
+import { fetchMemories } from "@/services/database";
 
 
 const index = () => {
 
-  const memories = useSelector(state=>state.memories.memories);
+  const [memories,setMemories]= useState([]);
+  useState(async ()=>{
+      const data = await fetchMemories();
+      if(data != undefined){
+        setMemories(data);
+      }
+  },[]);
+  // const memories = useSelector(state=>state.memories.memories);
   
-  return <MemoryList places={memories} />;
+  return <MemoryList  places={memories} />
 };
 
 export default index;

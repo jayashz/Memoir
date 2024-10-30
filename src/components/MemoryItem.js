@@ -1,17 +1,21 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React from "react";
-
-const MemoryItem = ({ place, onSelect }) => {
+import React, { memo } from "react";
+import { useNavigation } from "expo-router";
+const MemoryItem = ({ memory }) => {
+  const navigation = useNavigation();
+  function selectMemoryHandler(){
+    navigation.navigate('MemoryDetails',memory);
+  }
   return (
-    <Pressable onPress={onSelect}>
-      <View className="relative w-full">
+    <Pressable onPress={selectMemoryHandler}>
+      <View className="relative w-full my-4">
         <Image
-          source={{ uri: place.imageUri }}
+          source={{ uri: memory.imageUri }}
           className="w-full h-[30vh] bg-red-200 rounded-lg"
         />
         <View className="absolute bottom-3 left-3">
-          <Text className="text-white font-semibold text-xl">{place.title}</Text>
-          <Text className="text-white">{place.Address}</Text>
+          <Text className="text-white font-semibold text-xl">{memory.title}</Text>
+          <Text className="text-white">{memory.Address}</Text>
         </View>
       </View>
     </Pressable>

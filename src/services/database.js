@@ -5,13 +5,13 @@ const database = SQLite.openDatabaseSync("memories.db");
 export async function dbInit() {
   try{
     await database.execAsync(`CREATE TABLE IF NOT EXISTS memories (
-            id INTEGER PRIMARY KEY NOT NULL,
-            title TEXT NOT NULL,
-            description TEXT NOT NULL,
-            imageUri TEXT NOT NULL,
-            address TEXT NOT NULL,
-            lat REAL NOT NULL,
-            lng REAL NOT NULL
+id INTEGER PRIMARY KEY NOT NULL,
+title TEXT NOT NULL,
+description TEXT NOT NULL,
+imageUri TEXT NOT NULL,
+address TEXT NOT NULL,
+lat REAL NOT NULL,
+lng REAL NOT NULL
           )`);
   }catch(error){
     console.log('Error initialization:',error);
@@ -20,8 +20,9 @@ export async function dbInit() {
 }
 
 export async function insertMemory(memory) {
+
   try{
-    await database.prepareAsync(`INSERT INTO memories (title, description, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?, ?)`,
+    await database.runAsync(`INSERT INTO memories (title, description, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?, ?)`,
         [
           memory.title,
           memory.description,
@@ -33,6 +34,16 @@ export async function insertMemory(memory) {
   } catch(error){
     console.log('Error in inserting to database:',error);
   }
-  const res = await database.getAllAsync(`SELECT * FROM memories`);
-  console.log(res);
+
+}
+
+export async function fetchMemories(){
+
+  try{
+    const data = await database.getAllAsync(`SELECT * FROM memories`);
+    return data;
+  }catch(error){
+    console.log('Error in fetching data from the database: ',error);
+  }
+
 }

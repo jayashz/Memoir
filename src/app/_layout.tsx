@@ -12,10 +12,10 @@ import * as SplashScreen from 'expo-splash-screen';
 
 
 SplashScreen.preventAutoHideAsync();
+
 export default function Main() {
   useEffect(() => {
-    dbInit()
-      .then(() => {
+    dbInit().then(() => {
         SplashScreen.hideAsync();
       })
       .catch((err) => {
@@ -55,6 +55,7 @@ export default function Main() {
         />
         <Stack.Screen name="AddMemory" />
         <Stack.Screen name="Map" options={{ headerShown: false }} />
+        <Stack.Screen name="MemoryDetails" />
       </Stack>
     </Provider>
   );

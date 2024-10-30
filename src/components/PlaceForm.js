@@ -59,7 +59,7 @@ const PlaceForm = () => {
       description:
         description.length == 0 ? "No description was added!" : description,
       imageUri: selectedImage,
-      Address: pickedLocation,
+      address: pickedLocation,
       location: userLatLng,
       
     });
@@ -69,7 +69,7 @@ const PlaceForm = () => {
         description:
           description.length == 0 ? "No description was added!" : description,
         imageUri: selectedImage,
-        Address: pickedLocation,
+        address: pickedLocation,
         location: userLatLng,
         id: userLatLng.lat + "id" + Math.floor(Math.random() * 100),
       })

@@ -4,6 +4,7 @@ import MemoryItem from "./MemoryItem";
 import { Colors } from "@/constants/Colors";
 
 const MemoryList = ({ places }) => {
+
   if (!places || places.length === 0) {
     return (
       <View className="flex-1 justify-center items-center">
@@ -15,8 +16,9 @@ const MemoryList = ({ places }) => {
     <FlatList
       data={places}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <MemoryItem place={item} />}
+      renderItem={({ item }) => <MemoryItem memory={item} onSelect={(selectedMemory)=>console.log(selectedMemory)} />}
       style={{flex:1, padding:10}}
+      extraData={places}
     />
   );
 };
