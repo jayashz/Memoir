@@ -7,22 +7,23 @@ import { dbInit } from "../services/database";
 import * as SplashScreen from "expo-splash-screen";
 import Feather from "@expo/vector-icons/Feather";
 import { Colors } from "@/constants/Colors";
-
+import CustTabBar from "../components/ui/CustTabBar";
 SplashScreen.preventAutoHideAsync();
 const InitialLayout = () => {
   return (
     <Tabs
+      tabBar={props => <CustTabBar {...props} />}
+      
       screenOptions={{
         tabBarInactiveTintColor: "black",
         tabBarActiveTintColor: Colors.primaryOrange,
-        tabBarLabelStyle:{
-          fontSize:13
+        tabBarLabelStyle: {
+          fontSize: 13,
         },
       }}
     >
       <Tabs.Screen
         name="(home)"
-        
         options={{
           headerShown: false,
           tabBarLabel: "Home",
@@ -31,7 +32,14 @@ const InitialLayout = () => {
           ),
         }}
       />
-      <Tabs.Screen name="Favourites" options={{tabBarIcon:({color})=><Feather name="heart" size={24} color={color} />}}/>
+      <Tabs.Screen
+        name="Favourites"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Feather name="heart" size={24} color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="Settings"
         options={{
@@ -40,7 +48,6 @@ const InitialLayout = () => {
           ),
         }}
       />
-
     </Tabs>
   );
 };
