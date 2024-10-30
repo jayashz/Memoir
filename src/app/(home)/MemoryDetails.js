@@ -2,8 +2,9 @@ import { View, Text, ScrollView, Image, Button } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import CustBtn from "../components/ui/CustBtn";
+import CustBtn from "../../components/ui/CustBtn";
 import { useNavigation } from "expo-router";
+
 const MemoryDetails = () => {
   const route = useRoute();
   const navigation = useNavigation();
@@ -31,8 +32,8 @@ const MemoryDetails = () => {
           source={{ uri: selectedMemory.imageUri }}
           className="w-full h-[35vh] rounded-lg"
         />
-        <Text>{selectedMemory.address}</Text>
-        <Text>{selectedMemory.description}</Text>
+        <Text className='text-center'>{selectedMemory.address}</Text>
+        <Text className='text-center mt-5'>{selectedMemory.description}</Text>
         <CustBtn onPress={viewMapHandler}>View on Map</CustBtn>
       </View>
     </ScrollView>

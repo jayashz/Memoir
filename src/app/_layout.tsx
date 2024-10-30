@@ -1,21 +1,54 @@
 import "../global.css";
-import { Stack } from "expo-router";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { Pressable, Text } from "react-native";
-import { useNavigation } from "expo-router";
-import { Colors } from "../constants/Colors";
+import { Slot, Tabs } from "expo-router";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
-import { useEffect, useState } from "react";
-import  {dbInit}  from "../services/database";
-import * as SplashScreen from 'expo-splash-screen';
-
+import { useEffect } from "react";
+import { dbInit } from "../services/database";
+import * as SplashScreen from "expo-splash-screen";
+import Feather from "@expo/vector-icons/Feather";
+import { Colors } from "@/constants/Colors";
 
 SplashScreen.preventAutoHideAsync();
+const InitialLayout = () => {
+  return (
+    <Tabs
+      screenOptions={{
+        tabBarInactiveTintColor: "black",
+        tabBarActiveTintColor: Colors.primaryOrange,
+        tabBarLabelStyle:{
+          fontSize:13
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="(home)"
+        
+        options={{
+          headerShown: false,
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color }) => (
+            <Feather name="home" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen name="Favourites" options={{tabBarIcon:({color})=><Feather name="heart" size={24} color={color} />}}/>
+      <Tabs.Screen
+        name="Settings"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Feather name="settings" size={24} color={color} />
+          ),
+        }}
+      />
+
+    </Tabs>
+  );
+};
 
 export default function Main() {
   useEffect(() => {
-    dbInit().then(() => {
+    dbInit()
+      .then(() => {
         SplashScreen.hideAsync();
       })
       .catch((err) => {
@@ -23,40 +56,9 @@ export default function Main() {
       });
   }, []);
 
-  const navigation = useNavigation();
-
   return (
     <Provider store={store}>
-      <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.secondaryWhite,
-          },
-        }}
-      >
-        <Stack.Screen
-          name="index"
-          options={{
-            headerRight: () => (
-              <Pressable
-                onPress={() => {
-                  navigation.navigate("AddMemory");
-                }}
-              >
-                <AntDesign
-                  name="pluscircle"
-                  size={28}
-                  color={Colors.primaryOrange}
-                />
-              </Pressable>
-            ),
-            headerTitle: "Your memories",
-          }}
-        />
-        <Stack.Screen name="AddMemory" />
-        <Stack.Screen name="Map" options={{ headerShown: false }} />
-        <Stack.Screen name="MemoryDetails" />
-      </Stack>
+      <InitialLayout />
     </Provider>
   );
 }

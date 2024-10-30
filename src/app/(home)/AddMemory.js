@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import PlaceForm from '../components/PlaceForm'
-import { useNavigation } from 'expo-router'
+import PlaceForm from '../../components/PlaceForm'
+
 
 
 const AddMemory = () => {

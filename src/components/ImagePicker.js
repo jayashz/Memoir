@@ -6,10 +6,9 @@ import {
   launchImageLibraryAsync,
 } from "expo-image-picker";
 import { useState } from "react";
-import { Colors } from "../constants/Colors";
 import CustBtn from "./ui/CustBtn";
 
-function ImagePicker({onSelectImage}) {
+function ImagePicker({ onSelectImage }) {
   const [pickedImage, setPickedImage] = useState();
 
   const [cameraPermissionInformation, requestPermission] =
@@ -33,19 +32,29 @@ function ImagePicker({onSelectImage}) {
     return true;
   }
 
-  async function takeImageHandler() {
+  async function takeImageHandler(task) {
     const hasPermission = await verifyPermissions();
-
+    let image;
     if (!hasPermission) {
       return;
     }
-
-    const image = await launchCameraAsync({
-      allowsEditing:true,
-      aspect: [16, 9],
-      quality: 0.5,
-    });
-    onSelectImage({imgUri:image.assets[0].uri});
+    if (task == "camera") {
+      image = await launchCameraAsync({
+        allowsEditing: true,
+        aspect: [16, 9],
+        quality: 0.5,
+      });
+    } else {
+      image = await launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [16, 9],
+        quality: 0.5,
+      });
+    }
+    if (image.canceled) {
+      return;
+    }
+    onSelectImage({ imgUri: image.assets[0].uri });
     setPickedImage(image.assets[0].uri);
   }
 
@@ -62,7 +71,15 @@ function ImagePicker({onSelectImage}) {
       <View className="w-full h-[40vh] items-center justify-center bg-gray-300 rounded-md">
         {imagePreview}
       </View>
-      <CustBtn onPress={takeImageHandler} icon='camera'>Take a picture</CustBtn>
+      <CustBtn onPress={() => takeImageHandler("camera")} icon="camera">
+        Take a picture
+      </CustBtn>
+      <CustBtn
+        onPress={() => takeImageHandler("gallery")}
+        icon="image-inverted"
+      >
+        Select from gallery
+      </CustBtn>
     </View>
   );
 }

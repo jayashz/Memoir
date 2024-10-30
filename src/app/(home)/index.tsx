@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MemoryList from "../components/MemoryList";
-import { useSelector } from "react-redux";
+import MemoryList from "../../components/MemoryList";
 import { fetchMemories } from "@/services/database";
 
 

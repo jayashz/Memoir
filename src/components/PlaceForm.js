@@ -96,7 +96,7 @@ const PlaceForm = () => {
           />
           <TextInput
             multiline
-            className="h-[30vh] w-full border-2 mt-4"
+            className="h-[30vh] w-full border-2 mt-4 rounded-lg p-2"
             placeholder="Description of the event (optional)"
             style={{ borderColor: Colors.primaryOrange }}
             onChangeText={(e) => setDescription(e)}

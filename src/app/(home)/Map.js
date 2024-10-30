@@ -4,7 +4,7 @@ import MapView, { Marker } from "react-native-maps";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
 import { useRoute } from "@react-navigation/native";
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const Map = () => {
