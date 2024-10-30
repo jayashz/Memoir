@@ -8,13 +8,11 @@ import { Colors } from "../constants/Colors";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const Map = () => {
-  const [selectedLocation, setSelectedLocation] = useState([]);
-  const navigation = useNavigation();
   const route = useRoute();
-
   const selectedRegion = route.params && route.params;
-  console.log(selectedRegion);
 
+  const [selectedLocation, setSelectedLocation] = useState(selectedRegion);
+  const navigation = useNavigation();
 
   const region = {
     latitude: selectedRegion ? selectedRegion.initialLat : 27.612390995083636,
@@ -30,16 +28,16 @@ const Map = () => {
   }
 
   function confirmLocation() {
-    if (selectedLocation.length == 0) {
-      //No location picked
-      navigation.goBack();
+    
+    if (!selectedRegion && selectedLocation) {
+      navigation.navigate("AddMemory", {
+        pickedLat: selectedLocation.lat,
+        pickedLng: selectedLocation.lng,
+      });
       return;
     }
-
-    navigation.navigate("AddMemory", {
-      pickedLat: selectedLocation.lat,
-      pickedLng: selectedLocation.lng,
-    });
+    navigation.goBack();
+    return;
   }
   return (
     <MapView
@@ -62,10 +60,10 @@ const Map = () => {
         className="p-2 w-14 h-14 rounded-full justify-center items-center absolute bottom-12 right-8"
         style={{ backgroundColor: Colors.primaryOrange }}
       >
-        {selectedLocation.length == 0 ? (
-          <AntDesign name="close" size={24} color="black" />
-        ) : (
+        {selectedLocation && !selectedRegion ? (
           <MaterialIcons name="done" size={26} color="black" />
+        ) : (
+          <AntDesign name="close" size={24} color="black" />
         )}
       </Pressable>
     </MapView>
