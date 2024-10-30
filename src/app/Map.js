@@ -12,27 +12,31 @@ const Map = () => {
   const selectedRegion = route.params && route.params;
 
   const [selectedLocation, setSelectedLocation] = useState(selectedRegion);
+  
   const navigation = useNavigation();
 
   const region = {
     latitude: selectedRegion ? selectedRegion.initialLat : 27.612390995083636,
-    longitude: selectedRegion ? selectedRegion.intialLng : 84.57322361140824,
-    latitudeDelta: 0.0922,
+    longitude: selectedRegion ? selectedRegion.initialLng : 84.57322361140824,
+    latitudeDelta: 0.0822,
     longitudeDelta: 0.0421,
   };
-  console.log(region);
+
   function selectLocation(event) {
+    if(selectedRegion){
+      return;
+    }
     const lat = event.nativeEvent.coordinate.latitude;
     const lng = event.nativeEvent.coordinate.longitude;
-    setSelectedLocation({ lat: lat, lng: lng });
+    setSelectedLocation({ initialLat: lat, initialLng: lng });
   }
 
   function confirmLocation() {
     
     if (!selectedRegion && selectedLocation) {
       navigation.navigate("AddMemory", {
-        pickedLat: selectedLocation.lat,
-        pickedLng: selectedLocation.lng,
+        pickedLat: selectedLocation.initialLat,
+        pickedLng: selectedLocation.initialLng,
       });
       return;
     }
@@ -49,8 +53,8 @@ const Map = () => {
         <Marker
           title="Picked location"
           coordinate={{
-            latitude: selectedLocation.lat,
-            longitude: selectedLocation.lng,
+            latitude: selectedLocation.initialLat,
+            longitude: selectedLocation.initialLng,
           }}
         />
       )}

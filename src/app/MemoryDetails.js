@@ -18,7 +18,7 @@ const MemoryDetails = () => {
   function viewMapHandler() {
     navigation.navigate("Map", {
       initialLat: selectedMemory.lat,
-      intialLng: selectedMemory.lng,
+      initialLng: selectedMemory.lng,
     });
   }
   return (
