@@ -5,6 +5,7 @@ import {
   TextInput,
   Keyboard,
   Alert,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../constants/Colors";
@@ -14,7 +15,7 @@ import CustBtn from "./ui/CustBtn";
 import { useNavigation } from "expo-router";
 import { useDispatch } from "react-redux";
 import { saveMemory } from "../store/memorySlice";
-import {insertMemory} from '../services/database';
+import { insertMemory } from "../services/database";
 
 const PlaceForm = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,6 @@ const PlaceForm = () => {
       imageUri: selectedImage,
       address: pickedLocation,
       location: userLatLng,
-      
     });
     dispatch(
       saveMemory({
@@ -77,23 +77,21 @@ const PlaceForm = () => {
     navigation.navigate("index");
   }
   return (
-
-      <ScrollView className="flex-1 p-4 " onScrollBeginDrag={Keyboard.dismiss}>
-        <View className="flex-1 justify-center items-center mb-14">
-          <Text className="text-2xl font-bold">Title</Text>
-          <TextInput
-            onChangeText={(e) => setTitle(e)}
-            value={title}
-            className={`p-4 border-b-2 w-full`}
-            style={{ borderColor: Colors.primaryOrange }}
-            placeholder="Eg. A day in mustang"
-          />
-          <ImagePicker
-            onSelectImage={({ imgUri }) => setSelectedImage(imgUri)}
-          />
-          <LocationPicker
-            onSelectLocation={(currLocation) => onPickLocation(currLocation)}
-          />
+    <ScrollView className="flex-1 p-4 " onScrollBeginDrag={Keyboard.dismiss}>
+      <View className="flex-1 justify-center items-center mb-[90px]">
+        <Text className="text-2xl font-bold">Title</Text>
+        <TextInput
+          onChangeText={(e) => setTitle(e)}
+          value={title}
+          className={`p-4 border-b-2 w-full`}
+          style={{ borderColor: Colors.primaryOrange }}
+          placeholder="Eg. A day in mustang"
+        />
+        <ImagePicker onSelectImage={({ imgUri }) => setSelectedImage(imgUri)} />
+        <LocationPicker
+          onSelectLocation={(currLocation) => onPickLocation(currLocation)}
+        />
+        
           <TextInput
             multiline
             className="h-[30vh] w-full border-2 mt-4 rounded-lg p-2"
@@ -107,9 +105,9 @@ const PlaceForm = () => {
               Save
             </CustBtn>
           </View>
-        </View>
-      </ScrollView>
 
+      </View>
+    </ScrollView>
   );
 };
 

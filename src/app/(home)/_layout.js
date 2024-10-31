@@ -31,8 +31,7 @@ const PubLayout = () => {
                 />
               </Pressable>
             ),
-            headerTitle: ()=><Image source={require('../../assets/Memoir.png')} style={{height:55, objectFit:'contain'}} />,
-            headerShadowVisible:false
+            headerShown:false
           }}
         />
         <Stack.Screen name="AddMemory" options={{headerShown:false}} />

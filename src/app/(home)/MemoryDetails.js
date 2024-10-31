@@ -34,7 +34,7 @@ const MemoryDetails = () => {
     <SafeAreaView>
       <BackNav />
       <ScrollView classNam="flex-1">
-        <View className="flex-1 p-4">
+        <View className="flex-1 p-4 mb-[90px]">
           <Text className=" text-center font-bold text-3xl">
             {selectedMemory.title}
           </Text>
@@ -43,7 +43,7 @@ const MemoryDetails = () => {
             className="w-full h-[35vh] rounded-lg"
           />
           <Text className="text-center">{selectedMemory.address}</Text>
-          <Text className="text-center mt-5">{selectedMemory.description}</Text>
+          <Text className="text-center mt-5 font-semibold text-lg">{selectedMemory.description}</Text>
           <CustBtn onPress={viewMapHandler}>View on Map</CustBtn>
         </View>
       </ScrollView>
