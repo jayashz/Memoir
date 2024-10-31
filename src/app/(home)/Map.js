@@ -61,7 +61,7 @@ const Map = () => {
 
       <Pressable
         onPress={confirmLocation}
-        className="p-2 w-14 h-14 rounded-full justify-center items-center absolute bottom-12 right-8"
+        className="p-2 w-14 h-14 rounded-full justify-center items-center absolute bottom-[100px] right-8"
         style={{ backgroundColor: Colors.primaryOrange }}
       >
         {selectedLocation && !selectedRegion ? (

@@ -22,7 +22,7 @@ export default function CustTabBar({ state, descriptors, navigation }) {
   return (
     <View
       style={{ flexDirection: "row" }}
-      className="absolute bg-slate-50 bottom-[30px] w-[250px] justify-between items-center self-center p-2 rounded-full"
+      className="absolute bg-slate-50 bottom-[24px] w-[250px] justify-between items-center self-center p-2 rounded-full"
     >
       {state.routes.map((route, index) => {
 

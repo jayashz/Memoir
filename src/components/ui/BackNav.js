@@ -5,16 +5,14 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Colors } from "../../constants/Colors";
 import { useNavigation } from "expo-router";
 import { useRoute } from "@react-navigation/native";
-const BackNav = () => {
+const BackNav = ({ addtoFavourite }) => {
   const navigation = useNavigation();
   const route = useRoute();
-
-  
 
   return (
     <View className="p-4 justify-between flex-row items-center">
       <View className="w-[30px]">
-        {!route.key.includes('index') && 
+        {!route.key.includes("index") && (
           <Pressable onPress={() => navigation.goBack()}>
             <Entypo
               name="chevron-with-circle-left"
@@ -22,7 +20,7 @@ const BackNav = () => {
               color={Colors.primaryOrange}
             />
           </Pressable>
-        }
+        )}
       </View>
 
       <View>
@@ -34,18 +32,24 @@ const BackNav = () => {
 
       <View className="w-[30px]">
         {route.key.includes("MemoryDetails") ? (
-          <Entypo name="heart" size={30} color="red" />
-        ) : route.key.includes('index')?<Pressable
-        onPress={() => {
-          navigation.navigate("AddMemory");
-        }}
-      >
-        <AntDesign
-          name="pluscircle"
-          size={28}
-          color={Colors.primaryOrange}
-        />
-      </Pressable>:''}
+          <Pressable onPress={addtoFavourite}>
+            <Entypo name="heart" size={30} color="red" />
+          </Pressable>
+        ) : route.key.includes("index") ? (
+          <Pressable
+            onPress={() => {
+              navigation.navigate("AddMemory");
+            }}
+          >
+            <AntDesign
+              name="pluscircle"
+              size={28}
+              color={Colors.primaryOrange}
+            />
+          </Pressable>
+        ) : (
+          ""
+        )}
       </View>
     </View>
   );

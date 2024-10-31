@@ -12,11 +12,14 @@ import { useRoute } from "@react-navigation/native";
 import CustBtn from "../../components/ui/CustBtn";
 import { useNavigation } from "expo-router";
 import BackNav from "../../components/ui/BackNav";
+import { useDispatch } from "react-redux";
+import { favMemory } from "../../store/memorySlice";
 
 const MemoryDetails = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
+  const dispatch = useDispatch();
   const [selectedMemory, setSelectedMemory] = useState([]);
 
   useEffect(() => {
@@ -30,9 +33,12 @@ const MemoryDetails = () => {
       initialLng: selectedMemory.lng,
     });
   }
+  function addToFavouriteHandler(){
+    dispatch(favMemory(route.params.id));
+  }
   return (
     <SafeAreaView>
-      <BackNav />
+      <BackNav addtoFavourite={addToFavouriteHandler} />
       <ScrollView classNam="flex-1">
         <View className="flex-1 p-4 mb-[90px]">
           <Text className=" text-center font-bold text-3xl">
