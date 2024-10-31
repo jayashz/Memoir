@@ -1,6 +1,7 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
 import PlaceForm from '../../components/PlaceForm'
+import BackNav from '../../components/ui/BackNav'
 
 
 
@@ -8,9 +9,12 @@ const AddMemory = () => {
 
   
   return (
-    <View className='flex-1'>
+
+    <SafeAreaView className='flex-1'>
+        <BackNav/>
         <PlaceForm/>
-    </View>
+    </SafeAreaView>
+
   )
 }
 

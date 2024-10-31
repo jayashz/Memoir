@@ -2,7 +2,7 @@
 import React from 'react'
 import { Stack } from 'expo-router';
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { Pressable, Text } from "react-native";
+import { Image, Pressable, Text } from "react-native";
 import { Colors } from "../../constants/Colors";
 import { useNavigation } from 'expo-router';
 const PubLayout = () => {
@@ -31,12 +31,13 @@ const PubLayout = () => {
                 />
               </Pressable>
             ),
-            headerTitle: "Your memories",
+            headerTitle: ()=><Image source={require('../../assets/Memoir.png')} style={{height:55, objectFit:'contain'}} />,
+            headerShadowVisible:false
           }}
         />
-        <Stack.Screen name="AddMemory" />
+        <Stack.Screen name="AddMemory" options={{headerShown:false}} />
         <Stack.Screen name="Map" options={{ headerShown: false }} />
-        <Stack.Screen name="MemoryDetails" />
+        <Stack.Screen name="MemoryDetails" options={{headerShown:false}} />
 
       </Stack>
   )

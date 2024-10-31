@@ -25,7 +25,7 @@ export default function CustTabBar({ state, descriptors, navigation }) {
       className="absolute bg-slate-50 bottom-[30px] w-[250px] justify-between items-center self-center p-2 rounded-full"
     >
       {state.routes.map((route, index) => {
-        console.log(route.name);
+
         if (["_sitemap", "+not-found"].includes(route.name)) {
           return null;
         }

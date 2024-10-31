@@ -13,40 +13,18 @@ const InitialLayout = () => {
   return (
     <Tabs
       tabBar={props => <CustTabBar {...props} />}
-      
-      screenOptions={{
-        tabBarInactiveTintColor: "black",
-        tabBarActiveTintColor: Colors.primaryOrange,
-        tabBarLabelStyle: {
-          fontSize: 13,
-        },
-      }}
     >
       <Tabs.Screen
         name="(home)"
         options={{
           headerShown: false,
-          tabBarLabel: "Home",
-          tabBarIcon: ({ color }) => (
-            <Feather name="home" size={24} color={color} />
-          ),
         }}
       />
       <Tabs.Screen
         name="Favourites"
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Feather name="heart" size={24} color={color} />
-          ),
-        }}
       />
       <Tabs.Screen
         name="Settings"
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Feather name="settings" size={24} color={color} />
-          ),
-        }}
       />
     </Tabs>
   );

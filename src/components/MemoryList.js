@@ -16,9 +16,10 @@ const MemoryList = ({ places }) => {
     <FlatList
       data={places}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <MemoryItem memory={item} onSelect={(selectedMemory)=>console.log(selectedMemory)} />}
+      renderItem={({ item }) => <MemoryItem memory={item} />}
       style={{flex:1, padding:10}}
       extraData={places}
+      contentInsetAdjustmentBehavior='automatic'
     />
   );
 };
