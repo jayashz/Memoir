@@ -1,13 +1,33 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import { Colors } from "@/constants/Colors";
 
 export default function CustTabBar({ state, descriptors, navigation }) {
+  const icon = {
+    home: () => (
+      <Feather name="home" size={24} color={isFocused ? "#673ab7" : "#222"} />
+    ),
+    favourites: () => (
+      <Feather name="heart" size={24} color={isFocused ? "#673ab7" : "#222"} />
+    ),
+    settings: () => (
+      <Feather
+        name="settings"
+        size={24}
+        color={isFocused ? "#673ab7" : "#222"}
+      />
+    ),
+  };
 
   return (
-    <View style={{ flexDirection: 'row' }} className='absolute bottom-[50px] w-[300px] bg-[#ccc] justify-between items-center self-center'>
+    <View
+      style={{ flexDirection: "row" }}
+      className="absolute bg-slate-50 bottom-[30px] w-[250px] justify-between items-center self-center p-2 rounded-full"
+    >
       {state.routes.map((route, index) => {
-        console.log(route);
-        if(['_sitemap','+not-found'].includes(route.name)){
-            return null;
+        console.log(route.name);
+        if (["_sitemap", "+not-found"].includes(route.name)) {
+          return null;
         }
         const { options } = descriptors[route.key];
         const label =
@@ -21,7 +41,7 @@ export default function CustTabBar({ state, descriptors, navigation }) {
 
         const onPress = () => {
           const event = navigation.emit({
-            type: 'tabPress',
+            type: "tabPress",
             target: route.key,
             canPreventDefault: true,
           });
@@ -33,26 +53,39 @@ export default function CustTabBar({ state, descriptors, navigation }) {
 
         const onLongPress = () => {
           navigation.emit({
-            type: 'tabLongPress',
+            type: "tabLongPress",
             target: route.key,
           });
         };
 
         return (
-          <TouchableOpacity key={route.key}
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
 
-            
-          >
-            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
-              {label}
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              key={route.key}
+              accessibilityRole="button"
+              accessibilityState={isFocused ? { selected: true } : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              testID={options.tabBarTestID}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              style={{backgroundColor:isFocused?Colors.primaryOrange:null, transform:[{scale:isFocused?1.4:1}],elevation:3}}
+              className="p-2 rounded-full justify-center items-center"
+            >
+              <Feather
+                name={
+                  route.name == "(home)"
+                    ? "home"
+                    : route.name == "Favourites"
+                    ? "heart"
+                    : "settings"
+                }
+                size={23}
+                color={isFocused ? 'white' : "#222"}
+                
+                
+              />
+            </TouchableOpacity>
+
         );
       })}
     </View>
