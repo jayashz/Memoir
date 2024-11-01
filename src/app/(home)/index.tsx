@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MemoryList from "../../components/MemoryList";
+import { SafeAreaView, View } from "react-native";
+import BackNav from "../../components/ui/BackNav";
+import { useSelector } from "react-redux";
 import { fetchMemories } from "@/services/database";
-import { SafeAreaView } from "react-native";
-import BackNav from '../../components/ui/BackNav';
-
-import { useDispatch, UseDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { saveMemory } from "@/store/memorySlice";
-
 const index = () => {
   const dispatch = useDispatch();
-  const [memories, setMemories] = useState([]);
-  useState(async () => {
-    const data = await fetchMemories();
-    if (data != undefined) {
-      setMemories(data);
-      dispatch(saveMemory(data));
+
+  //fetching data from database and stored in redux
+  useEffect(() => {
+    async function get() {
+      const data = await fetchMemories();
+      if (data != undefined) {
+        dispatch(saveMemory(data));
+      }
     }
+    get();
   }, []);
-  // const memories = useSelector(state=>state.memories.memories);
+
+  const memories = useSelector((state) => state.memories.memories[0]);
 
   return (
-    <SafeAreaView style={{flex:1}}>
-      <BackNav/>
+    <SafeAreaView style={{ flex: 1, marginBottom: -34 }}>
+      <BackNav />
       <MemoryList places={memories} />
     </SafeAreaView>
   );

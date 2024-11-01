@@ -17,7 +17,7 @@ const MemoryList = ({ places }) => {
       data={places}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => <MemoryItem memory={item} />}
-      style={{flex:1, padding:10}}
+      style={{flex:1, paddingHorizontal:10}}
       extraData={places}
       contentInsetAdjustmentBehavior='automatic'
     />

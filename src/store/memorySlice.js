@@ -8,14 +8,17 @@ const memorySlice = createSlice({
     reducers:{
         saveMemory:(state,action)=>{
             state.memories.push(action.payload);
-            console.log(state.memories);
+
         },
         favMemory:(state,action)=>{
             if(state.favMemories.includes(action.payload)){
                 return;
             }
             state.favMemories.push(action.payload);
-            console.log(state.favMemories);
+
+        },
+        removeFav:(state,action)=>{
+
         }
     }
 

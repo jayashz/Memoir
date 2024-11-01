@@ -10,7 +10,7 @@ const BackNav = ({ addtoFavourite }) => {
   const route = useRoute();
 
   return (
-    <View className="p-4 justify-between flex-row items-center">
+    <View className="px-4 justify-between flex-row items-center">
       <View className="w-[30px]">
         {!route.key.includes("index") && (
           <Pressable onPress={() => navigation.goBack()}>

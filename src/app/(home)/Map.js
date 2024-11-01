@@ -1,5 +1,5 @@
-import { View, Text, Alert, Pressable } from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { Pressable } from "react-native";
+import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
@@ -61,8 +61,8 @@ const Map = () => {
 
       <Pressable
         onPress={confirmLocation}
-        className="p-2 w-14 h-14 rounded-full justify-center items-center absolute bottom-[100px] right-8"
-        style={{ backgroundColor: Colors.primaryOrange }}
+        className="p-2 w-14 h-14 rounded-full justify-center items-center "
+        style={{ backgroundColor: Colors.primaryOrange,position:'absolute',bottom:100,right:20 }}
       >
         {selectedLocation && !selectedRegion ? (
           <MaterialIcons name="done" size={26} color="black" />

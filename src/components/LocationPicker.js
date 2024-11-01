@@ -1,9 +1,10 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, ActivityIndicator } from "react-native";
 import React, { useState, useEffect } from "react";
 import CustBtn from "./ui/CustBtn";
 import * as Location from "expo-location";
 import { useNavigation } from "expo-router";
 import { useRoute, useIsFocused } from "@react-navigation/native";
+import { Colors } from "../constants/Colors";
 
 
 const LocationPicker = ({onSelectLocation}) => {
@@ -11,6 +12,7 @@ const LocationPicker = ({onSelectLocation}) => {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const route = useRoute();
+  const [isLoading,setIsLoading] = useState(false);
 
   useEffect(()=>{
     onSelectLocation(currLocation);
@@ -44,16 +46,21 @@ const LocationPicker = ({onSelectLocation}) => {
   };
   let image;
   if (!!currLocation) {
+    image = <ActivityIndicator size='large' color={Colors.primaryOrange}/>;
+
     image = (
       <Image
         source={{
           uri: `https://maps.geoapify.com/v1/staticmap?style=osm-bright-smooth&width=400&height=300&center=lonlat%3A${currLocation.lng}%2C${currLocation.lat}&zoom=14.3497&marker=lonlat%3A${currLocation.lng}%2C${currLocation.lat}&apiKey=5d2ebf29a4284b56996ce858fcf181e9`,
         }}
         className="flex-1 w-full h-[300px] object-contain rounded-md"
+        placeholder='test'
+
       />
     );
+    
   } else {
-    image = <Text>No Location picked yet.</Text>;
+    image = <Text>No location selected...</Text>;
   }
 
   return (

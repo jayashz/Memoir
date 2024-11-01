@@ -1,11 +1,9 @@
 import {
   View,
-  Text,
   ScrollView,
   TextInput,
   Keyboard,
   Alert,
-  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../constants/Colors";
@@ -79,13 +77,13 @@ const PlaceForm = () => {
   return (
     <ScrollView className="flex-1 p-4 " onScrollBeginDrag={Keyboard.dismiss}>
       <View className="flex-1 justify-center items-center mb-[90px]">
-        <Text className="text-2xl font-bold">Title</Text>
+       
         <TextInput
           onChangeText={(e) => setTitle(e)}
           value={title}
           className={`p-4 border-b-2 w-full`}
           style={{ borderColor: Colors.primaryOrange }}
-          placeholder="Eg. A day in mustang"
+          placeholder="Title: Eg. A day in mustang"
         />
         <ImagePicker onSelectImage={({ imgUri }) => setSelectedImage(imgUri)} />
         <LocationPicker

@@ -1,8 +1,10 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View,TouchableOpacity } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { Colors } from "@/constants/Colors";
 
+
 export default function CustTabBar({ state, descriptors, navigation }) {
+  
   const icon = {
     home: () => (
       <Feather name="home" size={24} color={isFocused ? "#673ab7" : "#222"} />
