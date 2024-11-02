@@ -5,6 +5,7 @@ import {
   Image,
   Button,
   SafeAreaView,
+  Platform,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
@@ -37,7 +38,7 @@ const MemoryDetails = () => {
     dispatch(favMemory(route.params.id));
   }
   return (
-    <SafeAreaView className='dark:bg-black'>
+    <SafeAreaView className='dark:bg-black' style={{paddingTop:Platform.OS=='android'?24:null}}>
       <BackNav addtoFavourite={addToFavouriteHandler} />
       <ScrollView classNam="flex-1">
         <View className="flex-1 p-4 mb-[90px]">
@@ -50,7 +51,7 @@ const MemoryDetails = () => {
           />
           <Text className="text-center dark:text-white">{selectedMemory.address}</Text>
           <Text className="text-center mt-5 font-semibold dark:text-white text-lg">{selectedMemory.description}</Text>
-          <CustBtn onPress={viewMapHandler}>View on Map</CustBtn>
+          <CustBtn onPress={viewMapHandler} icon='map' >View on Map</CustBtn>
         </View>
       </ScrollView>
     </SafeAreaView>

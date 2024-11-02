@@ -4,6 +4,7 @@ import {
   TextInput,
   Keyboard,
   Alert,
+  useColorScheme
 } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../constants/Colors";
@@ -16,6 +17,7 @@ import { saveMemory } from "../store/memorySlice";
 import { insertMemory } from "../services/database";
 
 const PlaceForm = () => {
+  const scheme = useColorScheme();
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -82,8 +84,10 @@ const PlaceForm = () => {
           onChangeText={(e) => setTitle(e)}
           value={title}
           className={`p-4 border-b-2 w-full`}
-          style={{ borderColor: Colors.primaryOrange }}
+          style={{ borderColor: Colors.primaryOrange,color:scheme=='dark'?'white':'black' }}
           placeholder="Title: Eg. A day in mustang"
+          placeholderTextColor='#C0C0C0'
+          
         />
         <ImagePicker onSelectImage={({ imgUri }) => setSelectedImage(imgUri)} />
         <LocationPicker
@@ -94,7 +98,8 @@ const PlaceForm = () => {
             multiline
             className="h-[30vh] w-full border-2 mt-4 rounded-lg p-2"
             placeholder="Description of the event (optional)"
-            style={{ borderColor: Colors.primaryOrange }}
+            placeholderTextColor="#C0C0C0"
+            style={{ borderColor: Colors.primaryOrange,color:scheme=='dark'?'white':'black' }}
             onChangeText={(e) => setDescription(e)}
             value={description}
           />

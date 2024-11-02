@@ -70,7 +70,7 @@ export default function CustTabBar({ state, descriptors, navigation }) {
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={{backgroundColor:isFocused?Colors.primaryOrange:null, transform:[{scale:isFocused?1.4:1}],elevation:3}}
+              style={{backgroundColor:isFocused?Colors.primaryOrange:null, transform:[{scale:isFocused?1.4:1}]}}
               className="p-2 rounded-full justify-center items-center"
             >
               <Feather

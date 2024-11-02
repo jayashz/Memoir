@@ -54,7 +54,6 @@ const LocationPicker = ({onSelectLocation}) => {
           uri: `https://maps.geoapify.com/v1/staticmap?style=osm-bright-smooth&width=400&height=300&center=lonlat%3A${currLocation.lng}%2C${currLocation.lat}&zoom=14.3497&marker=lonlat%3A${currLocation.lng}%2C${currLocation.lat}&apiKey=5d2ebf29a4284b56996ce858fcf181e9`,
         }}
         className="flex-1 w-full h-[300px] object-contain rounded-md"
-        placeholder='test'
 
       />
     );
@@ -67,7 +66,7 @@ const LocationPicker = ({onSelectLocation}) => {
     <View className="w-full mt-4 mb-4">
       <View className="h-[40vh] p-2 justify-center items-center">{image}</View>
       <View className="">
-        <CustBtn icon="map" onPress={getLocation}>
+        <CustBtn icon="location-pin" onPress={getLocation}>
           Locate me
         </CustBtn>
         <CustBtn icon="map" onPress={() => navigation.navigate("Map")}>

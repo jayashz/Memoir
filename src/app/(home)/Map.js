@@ -44,6 +44,7 @@ const Map = () => {
     return;
   }
   return (
+    <>
     <MapView
       style={{ flex: 1 }}
       initialRegion={region}
@@ -52,16 +53,19 @@ const Map = () => {
       {selectedLocation && (
         <Marker
           title="Picked location"
+          style={{zIndex:0}}
           coordinate={{
             latitude: selectedLocation.initialLat,
             longitude: selectedLocation.initialLng,
           }}
         />
       )}
+    </MapView>
+    
 
       <Pressable
         onPress={confirmLocation}
-        className="p-2 w-14 h-14 rounded-full justify-center items-center "
+        className="p-2 w-14 h-14 rounded-full justify-center items-center z-0"
         style={{ backgroundColor: Colors.primaryOrange,position:'absolute',bottom:100,right:20 }}
       >
         {selectedLocation && !selectedRegion ? (
@@ -70,7 +74,7 @@ const Map = () => {
           <AntDesign name="close" size={24} color="black" />
         )}
       </Pressable>
-    </MapView>
+    </>
   );
 };
 
