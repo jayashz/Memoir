@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MemoryList from "../../components/MemoryList";
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView } from "react-native";
 import BackNav from "../../components/ui/BackNav";
 import { useSelector } from "react-redux";
 import { fetchMemories } from "@/services/database";
@@ -23,7 +23,7 @@ const index = () => {
   const memories = useSelector((state) => state.memories.memories[0]);
 
   return (
-    <SafeAreaView style={{ flex: 1, marginBottom: -34 }}>
+    <SafeAreaView style={{ flex: 1, marginBottom: -34 }} className="dark:bg-black">
       <BackNav />
       <MemoryList places={memories} />
     </SafeAreaView>

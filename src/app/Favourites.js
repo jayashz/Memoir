@@ -8,9 +8,9 @@ const Favourites = () => {
 
   const filteredMemories = memories.filter((item) => favIds.includes(item.id));
 
-  console.log(favIds);
+
   return (
-    <View className="flex-1">
+    <View className="flex-1 dark:bg-black">
       <MemoryList places={filteredMemories} />
     </View>
   );

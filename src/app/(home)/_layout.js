@@ -1,36 +1,17 @@
 
 import React from 'react'
 import { Stack } from 'expo-router';
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { Image, Pressable, Text } from "react-native";
 import { Colors } from "../../constants/Colors";
-import { useNavigation } from 'expo-router';
+import { useColorScheme } from 'react-native';
 const PubLayout = () => {
-    const navigation= useNavigation();
+  const scheme = useColorScheme();
   return (
     <Stack
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: Colors.secondaryWhite,
-          },
-        }}
+       
       >
         <Stack.Screen
           name="index"
           options={{
-            headerRight: () => (
-              <Pressable
-                onPress={() => {
-                  navigation.navigate("AddMemory");
-                }}
-              >
-                <AntDesign
-                  name="pluscircle"
-                  size={28}
-                  color={Colors.primaryOrange}
-                />
-              </Pressable>
-            ),
             headerShown:false
           }}
         />

@@ -1,14 +1,19 @@
 import { View, Text, Pressable, Image } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Colors } from "../../constants/Colors";
 import { useNavigation } from "expo-router";
 import { useRoute } from "@react-navigation/native";
+import { useColorScheme } from "react-native";
 const BackNav = ({ addtoFavourite }) => {
+  const scheme = useColorScheme();
+
   const navigation = useNavigation();
   const route = useRoute();
 
+  const darkLogo= require('../../assets/light-logo.png');
+  const lightLogo = require('../../assets/Memoir.png');
   return (
     <View className="px-4 justify-between flex-row items-center">
       <View className="w-[30px]">
@@ -25,7 +30,7 @@ const BackNav = ({ addtoFavourite }) => {
 
       <View>
         <Image
-          source={require("../../assets/Memoir.png")}
+          source={scheme=='dark'?darkLogo:lightLogo}
           className="w-[120px] h-[40px] object-contain justify-center items-center"
         />
       </View>

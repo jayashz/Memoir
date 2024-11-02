@@ -37,19 +37,19 @@ const MemoryDetails = () => {
     dispatch(favMemory(route.params.id));
   }
   return (
-    <SafeAreaView>
+    <SafeAreaView className='dark:bg-black'>
       <BackNav addtoFavourite={addToFavouriteHandler} />
       <ScrollView classNam="flex-1">
         <View className="flex-1 p-4 mb-[90px]">
-          <Text className=" text-center font-bold text-3xl">
+          <Text className=" text-center font-bold text-3xl dark:text-white">
             {selectedMemory.title}
           </Text>
           <Image
             source={{ uri: selectedMemory.imageUri }}
             className="w-full h-[35vh] rounded-lg"
           />
-          <Text className="text-center">{selectedMemory.address}</Text>
-          <Text className="text-center mt-5 font-semibold text-lg">{selectedMemory.description}</Text>
+          <Text className="text-center dark:text-white">{selectedMemory.address}</Text>
+          <Text className="text-center mt-5 font-semibold dark:text-white text-lg">{selectedMemory.description}</Text>
           <CustBtn onPress={viewMapHandler}>View on Map</CustBtn>
         </View>
       </ScrollView>
