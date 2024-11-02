@@ -1,14 +1,14 @@
 import { View, Text, Pressable, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Colors } from "../../constants/Colors";
 import { useNavigation } from "expo-router";
 import { useRoute } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
+
 const BackNav = ({ addtoFavourite }) => {
   const scheme = useColorScheme();
-
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -36,11 +36,7 @@ const BackNav = ({ addtoFavourite }) => {
       </View>
 
       <View className="w-[30px]">
-        {route.key.includes("MemoryDetails") ? (
-          <Pressable onPress={addtoFavourite}>
-            <Entypo name="heart" size={30} color="red" />
-          </Pressable>
-        ) : route.key.includes("index") ? (
+        {route.key.includes("index") ? (
           <Pressable
             onPress={() => {
               navigation.navigate("AddMemory");

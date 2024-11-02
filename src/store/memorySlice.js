@@ -18,10 +18,11 @@ const memorySlice = createSlice({
 
         },
         removeFav:(state,action)=>{
-
+            state.favMemories.filter((item)=> item!= action.payload);
+            console.log(state.favMemories);
         }
     }
 
 });
-export const {saveMemory,favMemory} = memorySlice.actions;
+export const {saveMemory,favMemory,removeFav} = memorySlice.actions;
 export default memorySlice;

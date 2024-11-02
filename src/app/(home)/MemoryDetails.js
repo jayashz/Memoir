@@ -6,6 +6,7 @@ import {
   Button,
   SafeAreaView,
   Platform,
+  Pressable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useIsFocused } from "@react-navigation/native";
@@ -13,14 +14,18 @@ import { useRoute } from "@react-navigation/native";
 import CustBtn from "../../components/ui/CustBtn";
 import { useNavigation } from "expo-router";
 import BackNav from "../../components/ui/BackNav";
-import { useDispatch } from "react-redux";
-import { favMemory } from "../../store/memorySlice";
+import { useDispatch, useSelector } from "react-redux";
+import { favMemory,removeFav } from "../../store/memorySlice";
+import Entypo from "@expo/vector-icons/Entypo";
 
 const MemoryDetails = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
+
+  const favIds = useSelector((state) => state.memories.favMemories);
+
   const [selectedMemory, setSelectedMemory] = useState([]);
 
   useEffect(() => {
@@ -34,12 +39,21 @@ const MemoryDetails = () => {
       initialLng: selectedMemory.lng,
     });
   }
-  function addToFavouriteHandler(){
-    dispatch(favMemory(route.params.id));
+  function addToFavouriteHandler() {
+    if (!favIds.includes(route.params.id)) {
+      dispatch(favMemory(route.params.id));
+    }
+    else{
+      dispatch(removeFav(route.params.id));
+      console.log('called')
+    }
   }
   return (
-    <SafeAreaView className='dark:bg-black' style={{paddingTop:Platform.OS=='android'?24:null}}>
-      <BackNav addtoFavourite={addToFavouriteHandler} />
+    <SafeAreaView
+      className="dark:bg-black"
+      style={{ paddingTop: Platform.OS == "android" ? 24 : null }}
+    >
+      <BackNav />
       <ScrollView classNam="flex-1">
         <View className="flex-1 p-4 mb-[90px]">
           <Text className=" text-center font-bold text-3xl dark:text-white">
@@ -49,9 +63,28 @@ const MemoryDetails = () => {
             source={{ uri: selectedMemory.imageUri }}
             className="w-full h-[35vh] rounded-lg"
           />
-          <Text className="text-center dark:text-white">{selectedMemory.address}</Text>
-          <Text className="text-center mt-5 font-semibold dark:text-white text-lg">{selectedMemory.description}</Text>
-          <CustBtn onPress={viewMapHandler} icon='map' >View on Map</CustBtn>
+          <Text className="text-center dark:text-white">
+            {selectedMemory.address}
+          </Text>
+          <Pressable onPress={addToFavouriteHandler}>
+            <Entypo
+              name={
+                favIds.includes(route.params.id) ? "heart" : "heart-outlined"
+              }
+              size={30}
+              color="red"
+              className="text-center"
+            />
+          </Pressable>
+          <Text className="dark:text-white font-semibold text-lg text-center mt-4">
+            Here is the description of your memory:
+          </Text>
+          <Text className="text-center mt-5 font-semibold dark:text-white text-lg">
+            {selectedMemory.description}
+          </Text>
+          <CustBtn onPress={viewMapHandler} icon="map">
+            View on Map
+          </CustBtn>
         </View>
       </ScrollView>
     </SafeAreaView>
