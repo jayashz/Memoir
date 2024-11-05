@@ -57,17 +57,14 @@ const PlaceForm = () => {
     }
     await insertMemory({
       title: title,
-      description:
-        description.length == 0 ? "No description was added!" : description,
+      description:description?? 'No description was added!!',
       imageUri: selectedImage,
       address: pickedLocation,
       location: userLatLng,
     });
-    dispatch(
-      saveMemory({
+    dispatch(saveMemory({
         title: title,
-        description:
-          description.length == 0 ? "No description was added!" : description,
+        description:description?? 'No description was added!!',
         imageUri: selectedImage,
         address: pickedLocation,
         location: userLatLng,

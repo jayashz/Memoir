@@ -47,3 +47,11 @@ export async function fetchMemories(){
   }
 
 }
+
+export async function deleteMemory(id){
+  try{
+    await database.runAsync(`DELETE FROM memories WHERE id = ?`,id);
+  }catch(error){
+    console.log('Error in deleting from database: ',error)
+  }
+}
