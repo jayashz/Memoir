@@ -6,9 +6,7 @@ import { useColorScheme } from 'react-native';
 const PubLayout = () => {
   const scheme = useColorScheme();
   return (
-    <Stack
-       
-      >
+    <Stack>
         <Stack.Screen
           name="index"
           options={{

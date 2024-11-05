@@ -9,19 +9,19 @@ import { saveMemory } from "@/store/memorySlice";
 
 const index = () => {
   const dispatch = useDispatch();
-
   //fetching data from database and stored in redux
+
   useEffect(() => {
     async function get() {
       const data = await fetchMemories();
       if (data != undefined) {
-        dispatch(saveMemory(data));
+        data.forEach((item)=>dispatch(saveMemory(item)));
       }
     }
     get();
   }, []);
 
-  const memories = useSelector((state) => state.memories.memories[0]);
+  const memories = useSelector((state) => state.memories.memories);
 
   return (
     <SafeAreaView style={{ flex: 1, marginBottom: -34,paddingTop:Platform.OS=='android'?24:null }} className="dark:bg-black">

@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { memo } from "react";
+import React from "react";
 import { useNavigation } from "expo-router";
 const MemoryItem = ({ memory }) => {
   const navigation = useNavigation();

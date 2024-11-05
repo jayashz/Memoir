@@ -7,7 +7,7 @@ import { useNavigation } from "expo-router";
 import { useRoute } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 
-const BackNav = ({ addtoFavourite }) => {
+const BackNav = () => {
   const scheme = useColorScheme();
   const navigation = useNavigation();
   const route = useRoute();

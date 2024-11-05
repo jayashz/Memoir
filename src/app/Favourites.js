@@ -7,7 +7,7 @@ const Favourites = () => {
   const favIds = useSelector((state) => state.memories.favMemories);
 
 
-    const filteredMemories = favIds&&memories.filter((item) =>
+    const filteredMemories = favIds && memories.filter((item) =>
       favIds.includes(item.id)
     );
 

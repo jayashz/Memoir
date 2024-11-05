@@ -53,7 +53,6 @@ const MemoryDetails = () => {
     }
   }
   function memoryDeleteHandler(){
-    
     deleteMemory(route.params.id).then(()=>{
       dispatch(removeMemory(route.params.id));
     })

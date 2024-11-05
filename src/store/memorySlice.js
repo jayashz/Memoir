@@ -7,8 +7,9 @@ const memorySlice = createSlice({
     },
     reducers:{
         saveMemory:(state,action)=>{
-            state.memories.push(action.payload);
-            console.log(state.memories);
+            const memory = action.payload;
+            state.memories.push(memory);
+            console.log('From slice',state.memories);
         },
         removeMemory:(state,action)=>{
             const delId = action.payload;
