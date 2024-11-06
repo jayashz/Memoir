@@ -9,7 +9,7 @@ const memorySlice = createSlice({
         saveMemory:(state,action)=>{
             const memory = action.payload;
             state.memories.push(memory);
-            console.log('From slice',state.memories);
+
         },
         removeMemory:(state,action)=>{
             const delId = action.payload;

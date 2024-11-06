@@ -4,9 +4,9 @@ import {
   TextInput,
   Keyboard,
   Alert,
-  useColorScheme
+  useColorScheme,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Colors } from "../constants/Colors";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
@@ -16,14 +16,27 @@ import { useDispatch } from "react-redux";
 import { saveMemory } from "../store/memorySlice";
 import { insertMemory } from "../services/database";
 
-const PlaceForm = () => {
+const PlaceForm = ({savedMemory}) => {
   const scheme = useColorScheme();
   const dispatch = useDispatch();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+
+  
+  
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
   const [selectedImage, setSelectedImage] = useState();
   const [pickedLocation, setpickedLocation] = useState();
   const [userLatLng, setUserLatLng] = useState();
+
+  useEffect(()=>{
+    if(savedMemory){
+      setTitle(savedMemory.title);
+      setDescription(savedMemory.description);
+      setSelectedImage(savedMemory.imageUri);
+
+    }
+  },[savedMemory]);
+  
 
   const navigation = useNavigation();
 
@@ -43,7 +56,7 @@ const PlaceForm = () => {
       .then((result) =>
         setpickedLocation(result.features[0].properties.formatted)
       )
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log("error fetching the geoapify: ", error));
   }
 
   async function saveHandler() {
@@ -57,55 +70,61 @@ const PlaceForm = () => {
     }
     await insertMemory({
       title: title,
-      description:description?? 'No description was added!!',
+      description: description ?? "No description was added!!",
       imageUri: selectedImage,
       address: pickedLocation,
       location: userLatLng,
     });
-    dispatch(saveMemory({
-        title: title,
-        description:description?? 'No description was added!!',
-        imageUri: selectedImage,
-        address: pickedLocation,
-        location: userLatLng,
-        id: userLatLng.lat + "id" + Math.floor(Math.random() * 100),
-      })
+    dispatch(
+      saveMemory(
+        (memory = {
+          title: title,
+          description: description ?? "No description was added!!",
+          imageUri: selectedImage,
+          address: pickedLocation,
+          location: userLatLng,
+          id: userLatLng.lat + "id" + Math.floor(Math.random() * 100),
+        })
+      )
     );
     navigation.navigate("index");
   }
   return (
     <ScrollView className="flex-1 p-4 " onScrollBeginDrag={Keyboard.dismiss}>
       <View className="flex-1 justify-center items-center mb-[90px]">
-       
         <TextInput
           onChangeText={(e) => setTitle(e)}
           value={title}
           className={`p-4 border-b-2 w-full`}
-          style={{ borderColor: Colors.primaryOrange,color:scheme=='dark'?'white':'black' }}
+          style={{
+            borderColor: Colors.primaryOrange,
+            color: scheme == "dark" ? "white" : "black",
+          }}
           placeholder="Title: Eg. A day in mustang"
-          placeholderTextColor='#C0C0C0'
-          
+          placeholderTextColor="#C0C0C0"
         />
-        <ImagePicker onSelectImage={({ imgUri }) => setSelectedImage(imgUri)} />
+        <ImagePicker onSelectImage={({ imgUri }) => setSelectedImage(imgUri)} editImage={selectedImage} />
         <LocationPicker
           onSelectLocation={(currLocation) => onPickLocation(currLocation)}
         />
-        
-          <TextInput
-            multiline
-            className="h-[30vh] w-full border-2 mt-4 rounded-lg p-2"
-            placeholder="Description of the event (optional)"
-            placeholderTextColor="#C0C0C0"
-            style={{ borderColor: Colors.primaryOrange,color:scheme=='dark'?'white':'black' }}
-            onChangeText={(e) => setDescription(e)}
-            value={description}
-          />
-          <View className="w-full">
-            <CustBtn icon="save" onPress={saveHandler}>
-              Save
-            </CustBtn>
-          </View>
 
+        <TextInput
+          multiline
+          className="h-[30vh] w-full border-2 mt-4 rounded-lg p-2"
+          placeholder="Description of the event (optional)"
+          placeholderTextColor="#C0C0C0"
+          style={{
+            borderColor: Colors.primaryOrange,
+            color: scheme == "dark" ? "white" : "black",
+          }}
+          onChangeText={(e) => setDescription(e)}
+          value={description}
+        />
+        <View className="w-full">
+          <CustBtn icon="save" onPress={saveHandler}>
+            Save
+          </CustBtn>
+        </View>
       </View>
     </ScrollView>
   );

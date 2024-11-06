@@ -1,4 +1,4 @@
-import { View,TouchableOpacity } from "react-native";
+import { View,Pressable } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "react-native";
@@ -62,7 +62,7 @@ export default function CustTabBar({ state, descriptors, navigation }) {
 
         return (
 
-            <TouchableOpacity
+            <Pressable
               key={route.key}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
@@ -84,7 +84,7 @@ export default function CustTabBar({ state, descriptors, navigation }) {
                 size={23}
                 color={isFocused ? 'white' : scheme=='dark'?'white':'#222'}
               />
-            </TouchableOpacity>
+            </Pressable>
 
         );
       })}

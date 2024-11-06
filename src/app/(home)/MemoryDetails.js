@@ -33,9 +33,10 @@ const MemoryDetails = () => {
 
   const [selectedMemory, setSelectedMemory] = useState([]);
 
+  const routedData = route.params;
   useEffect(() => {
-    if (isFocused && route.params) {
-      setSelectedMemory(route.params);
+    if (isFocused && routedData) {
+      setSelectedMemory(routedData);
     }
   }, [isFocused, route]);
 
@@ -46,22 +47,25 @@ const MemoryDetails = () => {
     });
   }
   function addToFavouriteHandler() {
-    if (!favIds.includes(route.params.id)) {
-      dispatch(favMemory(route.params.id));
+    if (!favIds.includes(routedData.id)) {
+      dispatch(favMemory(routedData.id));
     } else {
-      dispatch(removeFav(route.params.id));
+      dispatch(removeFav(routedData.id));
     }
   }
   function memoryDeleteHandler(){
-    deleteMemory(route.params.id).then(()=>{
-      dispatch(removeMemory(route.params.id));
+    deleteMemory(routedData.id).then(()=>{
+      dispatch(removeMemory(routedData.id));
     })
     navigation.navigate('index');
+  }
+  function editHandler(){
+    navigation.navigate('AddMemory',selectedMemory);
   }
   return (
     <SafeAreaView
       className="dark:bg-black"
-      style={{ paddingTop: Platform.OS == "android" ? 24 : null }}
+      style={{ paddingTop: Platform.OS == "android" ? 24 : null,flex:1 }}
     >
       <BackNav />
       <ScrollView classNam="flex-1">
@@ -80,7 +84,7 @@ const MemoryDetails = () => {
             <Pressable onPress={addToFavouriteHandler}>
               <Entypo
                 name={
-                  favIds.includes(route.params.id) ? "heart" : "heart-outlined"
+                  favIds.includes(routedData.id) ? "heart" : "heart-outlined"
                 }
                 size={30}
                 color="red"
@@ -94,7 +98,7 @@ const MemoryDetails = () => {
                 color={scheme == "dark" ? "white" : "black"}
               />
             </Pressable>
-            <Pressable onPress={addToFavouriteHandler}>
+            <Pressable onPress={editHandler}>
               <FontAwesome6 name="edit" size={24} color={scheme == "dark" ? "white" : "black"} />
             </Pressable>
           </View>

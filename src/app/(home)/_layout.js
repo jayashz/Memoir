@@ -14,7 +14,7 @@ const PubLayout = () => {
           }}
         />
         <Stack.Screen name="AddMemory" options={{headerShown:false}} />
-        <Stack.Screen name="Map" options={{ headerShown: false }} />
+        <Stack.Screen name="Map" options={{ headerShown: false,tabBarVisible:false }} />
         <Stack.Screen name="MemoryDetails" options={{headerShown:false}} />
 
       </Stack>

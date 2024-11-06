@@ -1,9 +1,10 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import MemoryList from "../components/MemoryList";
+
 const Favourites = () => {
-  const memories = useSelector((state) => state.memories.memories[0]);
+  const memories = useSelector((state) => state.memories.memories);
   const favIds = useSelector((state) => state.memories.favMemories);
 
 
