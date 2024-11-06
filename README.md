@@ -15,18 +15,16 @@ cd memoirs
 npm install 
 ```
 
-Step 3: Create a keys.js file and export your apiKey and BackendUrl of from your firebase project.
-
-Step 4: 
+Step 3: 
 ```bash
 npm start
 ```
 
-Step 5: to start expo 
+Step 4: to start expo 
 ```bash
 s
 ```
-Step 6: to run on ios or android simulator. Or scan the qr with your device using expo go.
+Step 5: to run on ios or android simulator. Or scan the qr with your device using expo go.
 ```bash 
 i
 a
